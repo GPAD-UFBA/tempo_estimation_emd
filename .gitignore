@@ -2,4 +2,4 @@
 .vscode/
 data
 src/data
-tempo_emd.egg-info
+tempo_emd.egg-info/
