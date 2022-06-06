@@ -2,7 +2,7 @@ clc,clear
 datasets_list = dir('D:\Banco de Dados GPAD\dataset');
 datasets_list_length = length(datasets_list);
 new_Fs = 11025;
-
+mkdir h5files
 
 
 
@@ -14,7 +14,7 @@ ampSin = 0.5;
 
 
 
-for i=4:datasets_list_length
+for i=3:datasets_list_length
     path = strcat(datasets_list(i).folder,'\', datasets_list(i).name);
     dataset_files = dir(fullfile(path, '**\*.*'));
     dataset_files = dataset_files(~[dataset_files.isdir]);
@@ -32,7 +32,7 @@ for i=4:datasets_list_length
             dataset_name = strcat('/',fName);
             [imf] = upemd_ver_1_1(y_resamp,startMode,numImf,numSift,numPhase,ampSin);
             sImf = size(imf,2);
-            file_name = strcat(datasets_list(i).name,'.h5');
+            file_name = strcat('h5files/',datasets_list(i).name,'.h5');
             file_name
             dataset_name
             
