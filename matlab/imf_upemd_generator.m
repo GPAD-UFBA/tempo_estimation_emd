@@ -9,12 +9,12 @@ new_Fs = 11025;
 startMode = 1;
 numSift = 10;
 numPhase = 8; 
-numImf = 6;
+numImf = 15;
 ampSin = 0.5;
 
 
 
-for i=1:datasets_list_length
+for i=4:datasets_list_length
     path = strcat(datasets_list(i).folder,'\', datasets_list(i).name);
     dataset_files = dir(fullfile(path, '**\*.*'));
     dataset_files = dataset_files(~[dataset_files.isdir]);
@@ -33,8 +33,10 @@ for i=1:datasets_list_length
             [imf] = upemd_ver_1_1(y_resamp,startMode,numImf,numSift,numPhase,ampSin);
             sImf = size(imf,2);
             file_name = strcat(datasets_list(i).name,'.h5');
+            file_name
+            dataset_name
             
-            h5create(file_name,dataset_name,[6 sImf])
+            h5create(file_name,dataset_name,[numImf sImf])
             h5write(file_name,dataset_name, imf)
 
         end
