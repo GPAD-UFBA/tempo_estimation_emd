@@ -1,6 +1,5 @@
 .venv/
 .vscode/
-data
 *.h5
 tempo_emd.egg-info/
 matlab/*.h5
