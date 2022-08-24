@@ -14,7 +14,7 @@ ampSin = 0.5;
 
 
 
-for i=3:datasets_list_length
+for i=3:3
     path = strcat(datasets_list(i).folder,'\', datasets_list(i).name);
     dataset_files = dir(fullfile(path, '**\*.*'));
     dataset_files = dataset_files(~[dataset_files.isdir]);

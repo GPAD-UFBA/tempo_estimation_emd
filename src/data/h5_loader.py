@@ -3,15 +3,19 @@
 """
 import h5py
 import numpy as np
+from src.config.definitions import ROOT_DIR
 
-def load_h5(filename):
+def load_h5(filename,size=64):
     """
     Loads an h5 file and returns the data.
     """
-    num_imf = 15
-    with h5py.File(filename, 'r') as file:
+    with h5py.File(ROOT_DIR +'/'+ filename, 'r') as file:
         audio_list = list(file.keys())
-        array_data = np.zeros((len(audio_list),num_imf,0))
+        shape_array = np.array(file[audio_list[0]]).T.shape
+        array_data = np.zeros((len(audio_list),*shape_array))
+        
         for i,audio in enumerate(audio_list):
-            array_data[i] = np.array(file[audio])          
+            if i < size:
+                array_data[i] = np.array(file[audio]).T
+                      
     return array_data
