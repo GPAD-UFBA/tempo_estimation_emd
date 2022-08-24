@@ -60,10 +60,12 @@ class UPEMD:
         
         stop_shift = int(self.start_shift + self.num_shift -1)
         for shift in range(self.start_shift, stop_shift, self.ds):
-            
-            print(shift)
+                       
             print(self.media_array[shift:(shift+self.n_data-1)].shape)
-            media = self.media_array[shift:(shift+self.n_data-1)]
+
+            media = self.media_array[0][shift : shift+self.n_data].reshape((1,-1))
+            
+
 
             self.count_shift += 1
             
