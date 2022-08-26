@@ -18,8 +18,8 @@ class UPEMD:
         self.count_mode = 0
         self.count_shift = 0
         
-        conf = emd.sift.get_config('sift')
-        conf['imf_opts']['max_iters'] = self.num_sift
+        self.conf = emd.sift.get_config('sift')
+        self.conf['imf_opts']['max_iters'] = self.num_sift
         
         
     
@@ -35,7 +35,7 @@ class UPEMD:
             self.num_imf = default_max_imf   
 
     def set_last_mode(self):
-        self.last_mode = int(self.start_mode + self.num_imf -1)
+        self.last_mode = int(self.start_mode + self.num_imf)
         
     def validate_parameters(self,raw_signal):
         self.set_signal(raw_signal)
@@ -70,14 +70,14 @@ class UPEMD:
             self.count_shift += 1
             
             self.y = self.res + media
-            
-            sub_imf = emd.sift.sift(x, **conf)
+            self.y = self.y.reshape(-1)
+            sub_imf = emd.sift.sift(self.y, **self.conf)
             sub_imf = np.transpose(sub_imf)
             sub_imf[0,:] = sub_imf[0,:] - media
-            self.sum_wrk = self.sum_wrk + subImf[0,:]
+            self.sum_wrk = self.sum_wrk + sub_imf[0,:]
     
     def make_modes(self):
-        imf = np.zeros((self.last_mode - 1,self.n_data))
+        imf = np.zeros((self.last_mode,self.n_data))
         
         for mode in range(self.start_mode,self.last_mode - 1):
             self.amp_sin = self.amp_sin_0*np.std(self.res)
@@ -98,7 +98,7 @@ class UPEMD:
             self.count_mode += 1
         imf[self.count_mode,:] = self.res
     
-        return imf
+        return imf.T
         
     def upemd(self,raw_signal):
         self.validate_parameters(raw_signal)
