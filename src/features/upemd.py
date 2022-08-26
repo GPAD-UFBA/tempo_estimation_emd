@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import emd
 
-from sinusoidal_wave import sinusoidal_wave
+from src.features.sinusoidal_wave import sinusoidal_wave
 
 
 
@@ -151,10 +151,11 @@ class UPEMD:
         return self.imf.T
         
     def plot_imf(self):
-        fig, axs = plt.subplots(len(self.imf))
-        fig.suptitle('IMFs')
-        for index, imf in enumerate(self.imf):
-            axs[index].plot(imf)
+        # fig, axs = plt.subplots(len(self.imf))
+        # fig.suptitle('IMFs')
+        # for index, imf in enumerate(self.imf):
+        #     axs[index].plot(imf)
+        emd.plotting.plot_imfs(self.imf.T)
         
         
     
