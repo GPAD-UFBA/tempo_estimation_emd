@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt 
 import emd
+import torch
 
 from src.features.sinusoidal_wave import sinusoidal_wave
 
@@ -36,7 +37,8 @@ class UPEMD:
         
 
     def set_signal(self,raw_signal):
-
+        if type(raw_signal) is not np.ndarray:
+            raw_signal = raw_signal.numpy()
         self.signal = raw_signal.reshape(1,-1)
         
 
@@ -155,7 +157,7 @@ class UPEMD:
         
         
     
-    def upemd(self,raw_signal):
+    def make_imfs(self,raw_signal):
 
         self.validate_parameters(raw_signal)
 

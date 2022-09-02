@@ -3,3 +3,7 @@
 *.h5
 tempo_emd.egg-info/
 matlab/*.h5
+dataset/
+bpms_database/
+*.wav
+*.csv
