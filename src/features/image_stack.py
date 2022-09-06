@@ -86,10 +86,14 @@ class ImageStack:
         
         return self.odf_im
 
+    def create_mfcc(self):
+        self.mfcc = librosa.feature.mfcc(y=self.y, sr=self.sr,n_mfcc=128)
+        return self.mfcc
     def create_image_stack(self):
-
-        return np.dstack((self.create_melspectrogram(),self.create_superflux_image()))
-    
-
-        
-        
+        return np.dstack(
+            (
+                np.dstack(
+                (self.create_melspectrogram(),self.create_superflux_image())), 
+                self.create_mfcc()
+            )
+            )
