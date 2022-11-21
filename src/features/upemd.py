@@ -152,8 +152,8 @@ class UPEMD:
     
         return self.imf.T
         
-    def plot_imf(self):
-        emd.plotting.plot_imfs(self.imf.T)
+    def plot_imf(self,fig_args):
+        emd.plotting.plot_imfs(self.imf.T,fig_args=fig_args)
         
         
     
